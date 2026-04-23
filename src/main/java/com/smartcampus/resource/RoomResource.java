@@ -18,6 +18,7 @@ import java.util.*;
 @Path("/rooms")
 public class RoomResource {
 
+    // getting all room data
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllRooms() {
@@ -25,6 +26,7 @@ public class RoomResource {
         return Response.ok(roomList).build();
     }
 
+    // Adding new room data
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -40,7 +42,8 @@ public class RoomResource {
         DataStore.rooms.put(room.getId(), room);
         return Response.status(Response.Status.CREATED).entity(room).build();
     }
-
+    
+    // getting the room details with roomId
     @GET
     @Path("/{roomId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -53,11 +56,7 @@ public class RoomResource {
         return Response.ok(room).build();
     }
 
-    /**
-     * DELETE is idempotent — calling it multiple times is safe.
-     * First call: deletes the room (204). Subsequent calls: returns 404.
-     * Neither outcome causes unexpected side effects.
-     */
+    //deleting the room data
     @DELETE
     @Path("/{roomId}")
     @Produces(MediaType.APPLICATION_JSON)

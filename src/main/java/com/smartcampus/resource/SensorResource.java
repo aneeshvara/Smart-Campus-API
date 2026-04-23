@@ -19,10 +19,7 @@ import java.util.stream.Collectors;
 @Path("/sensors")
 public class SensorResource {
 
-    /**
-     * GET /api/v1/sensors
-     * Supports optional ?type=CO2 query parameter for filtering.
-     */
+    // get all sensors data
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSensors(@QueryParam("type") String type) {
@@ -37,10 +34,7 @@ public class SensorResource {
         return Response.ok(result).build();
     }
 
-    /**
-     * POST /api/v1/sensors
-     * Validates that the referenced roomId actually exists before registering.
-     */
+    // Adding new sensor data
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -54,7 +48,7 @@ public class SensorResource {
                     .entity("{\"error\": \"Sensor already exists\"}").build();
         }
 
-        // Validate that the roomId exists — throw 422 if it doesn't
+        // Validate that the roomId exists (422)
         if (sensor.getRoomId() == null || !DataStore.rooms.containsKey(sensor.getRoomId())) {
             throw new LinkedResourceNotFoundException(
                 "Cannot register sensor. The referenced roomId '"
@@ -69,7 +63,9 @@ public class SensorResource {
 
         return Response.status(Response.Status.CREATED).entity(sensor).build();
     }
-
+    
+    
+    // getting sensor data using sensorId
     @GET
     @Path("/{sensorId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -82,10 +78,7 @@ public class SensorResource {
         return Response.ok(sensor).build();
     }
 
-    /**
-     * Sub-resource locator — delegates to SensorReadingResource for all
-     * requests under /sensors/{sensorId}/readings
-     */
+
     @Path("/{sensorId}/readings")
     public SensorReadingResource getReadingsResource(@PathParam("sensorId") String sensorId) {
         return new SensorReadingResource(sensorId);

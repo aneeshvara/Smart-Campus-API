@@ -9,7 +9,8 @@ package com.smartcampus.exception;
  * @author anees
  */
 import com.smartcampus.model.ErrorMessage;
-import javax.ws.rs.core.*; import javax.ws.rs.ext.*;
+import javax.ws.rs.core.*;
+import javax.ws.rs.ext.*;
 import java.util.logging.*;
 
 @Provider

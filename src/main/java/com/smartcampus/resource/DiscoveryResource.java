@@ -21,10 +21,10 @@ public class DiscoveryResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getApiInfo() {
         Map<String, Object> info = new HashMap<>();
-        info.put("apiName", "Smart Campus Sensor & Room Management API");
+        info.put("apiName", "Smart Campus API");
         info.put("version", "1.0");
         info.put("description", "RESTful API for managing campus rooms and IoT sensors");
-        info.put("contact", "admin@smartcampus.ac.uk");
+        info.put("contact", "aneeshvara.20240883@iit.ac.lk");
 
         Map<String, String> links = new HashMap<>();
         links.put("rooms", "/api/v1/rooms");

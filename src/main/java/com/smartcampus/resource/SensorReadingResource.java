@@ -15,10 +15,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.util.*;
 
-/**
- * Sub-resource class for managing reading history of a specific sensor.
- * Instantiated by the sub-resource locator in SensorResource.
- */
+
 public class SensorReadingResource {
 
     private final String sensorId;
@@ -27,10 +24,7 @@ public class SensorReadingResource {
         this.sensorId = sensorId;
     }
 
-    /**
-     * GET /api/v1/sensors/{sensorId}/readings
-     * Returns all historical readings for this sensor.
-     */
+    // Get sensor reading
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getReadings() {
@@ -45,11 +39,7 @@ public class SensorReadingResource {
         return Response.ok(readings).build();
     }
 
-    /**
-     * POST /api/v1/sensors/{sensorId}/readings
-     * Appends a new reading AND updates the parent sensor's currentValue.
-     * Throws 403 if the sensor is in MAINTENANCE status.
-     */
+    // Adding new sensor reading
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -60,7 +50,7 @@ public class SensorReadingResource {
                     .entity("{\"error\": \"Sensor not found: " + sensorId + "\"}").build();
         }
 
-        // Block readings from sensors in MAINTENANCE
+        // Block readings from sensors in MAINTENANCE status
         if ("MAINTENANCE".equalsIgnoreCase(sensor.getStatus())) {
             throw new SensorUnavailableException(
                 "Sensor '" + sensorId + "' is currently in MAINTENANCE mode "
@@ -68,7 +58,7 @@ public class SensorReadingResource {
             );
         }
 
-        // Ensure there's a UUID and timestamp if the client didn't send them
+        // Checking for UUID and timestamp
         if (reading.getId() == null) {
             reading.setId(java.util.UUID.randomUUID().toString());
         }
