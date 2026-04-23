@@ -27,8 +27,8 @@ public class DiscoveryResource {
         info.put("contact", "aneeshvara.20240883@iit.ac.lk");
 
         Map<String, String> links = new HashMap<>();
-        links.put("rooms", "/api/v1/rooms");
-        links.put("sensors", "/api/v1/sensors");
+        links.put("rooms", "/SmartCampusAPI/api/v1/rooms");
+        links.put("sensors", "/SmartCampusAPI/api/v1/sensors");
         info.put("resources", links);
 
         return Response.ok(info).build();
