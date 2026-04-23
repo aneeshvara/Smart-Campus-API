@@ -4,7 +4,7 @@
 **Student :** Sureshkumar Aneeshvara  
 **Student ID :** w2120147 | 20240883
 **GitHub Repository :** https://github.com/aneeshvara/Smart-Campus-API
-**Video Demonstration :** [Your Repo URL]
+**Video Demonstration :** https://youtu.be/6zQFtVOW_8A
 
 ---
 
